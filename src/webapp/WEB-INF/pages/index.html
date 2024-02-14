@@ -1,15 +1,64 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title></title>
 </head>
+<style>
+    div {
+        margin-bottom: 15px
+    }
+</style>
 <body>
 <div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
-    </th:block>
+    <table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td><span th:text="${user.getId()}"></span></td>
+        <td><span th:text="${user.getFirstName()}"></span></td>
+        <td><span th:text="${user.getLastName()}"></span></td>
+        <td><span th:text="${user.getAge()}"></span></td>
+        <td><a th:href="@{edit/(id=${user.getId()})}">Edit</a></td>
+        <td>
+            <form action="/" th:action="@{delete(id=${user.getId()})}" method="post">
+            <button>Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+    </table>
+    <button type="button" onclick="window.add.showModal()">
+        Add new
+    </button>
+    <dialog id="add">
+        <form action="/add" method="post">
+            <div>
+                <label for="name"><b>Name</b></label>
+                <input type="text" name="firstName" id="name"/>
+            </div>
+            <div>
+                <label for="lastName"><b>Last Name</b></label>
+                <input type="text" name="lastName" id="lastName"/>
+            </div>
+            <div>
+                <label for="age"><b>Age</b></label>
+                <input type="number" name="age" id="age"/>
+            </div>
+            <input type="submit" value="Save" onclick="window.add.close()"/>
+        </form>
+        <button type="button" onclick="window.add.close()">
+            Cancel
+        </button>
+    </dialog>
 </div>
 </body>
 </html>
