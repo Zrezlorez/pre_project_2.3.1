@@ -3,10 +3,8 @@ package web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import web.dao.UserDao;
 import web.model.User;
 import web.service.UserService;
-import web.service.UserServiceImpl;
 
 @Controller
 public class UserController {
